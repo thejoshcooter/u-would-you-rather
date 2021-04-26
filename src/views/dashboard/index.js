@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import Question from '../../components/Question'
+
 const DashboardView = () => {
     return (
         <>
@@ -9,6 +11,10 @@ const DashboardView = () => {
                 <div>Unanswered</div>
                 <div>Answered</div>
             </Tabs>
+
+            <Feed>
+                <Question />
+            </Feed>
         </Container>
         </>
     )
@@ -41,6 +47,15 @@ const Tabs = styled.div`
         align-items: center;
         border: 1px solid black;
     }
+`
+
+const Feed = styled.div`
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
 `
 
 export default DashboardView
