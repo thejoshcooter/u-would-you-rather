@@ -1,9 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
+import { useDispatch, useSelector } from 'react-redux'
+import * as actions from '../../redux/actions/'
 
 import Question from '../../components/Question'
 
 const DashboardView = () => {
+    const dispatch = useDispatch()
+    
+    useEffect(() => {
+        console.log('*** DASHBOARD MOUNTED ***')
+        dispatch(actions.loadAppData())
+    }, [])
+    
     return (
         <>
         <Container>
