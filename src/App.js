@@ -6,6 +6,7 @@ import AuthenticationView from './views/authentication'
 import DashboardView from './views/dashboard'
 import LeaderboardView from './views/leaderboard'
 import CreateQuestionView from './views/create-question'
+import Sandbox from './views/sandbox'
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
       <Route path='/dashboard' component={DashboardView} />
       <Route path='/leaderboard' component={LeaderboardView} />
       <Route path='/create' component={CreateQuestionView} />
+      <Route path='/sandbox' component={Sandbox} />
     </>
   );
 }
