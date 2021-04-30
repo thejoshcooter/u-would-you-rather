@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Question = () => {
+const Question = ({ id, author, timestamp, optionOne, optionTwo }) => {
     return (
         <>
         <Container>
@@ -9,8 +9,8 @@ const Question = () => {
                 <Avatar />
 
                 <UserInfo>
-                    <span className='username'>John Doe</span>
-                    <span className='date'>posted 03:46PM | 04/26/21</span>
+                    <span className='username'>{author}</span>
+                    <span className='date'>posted {timestamp}</span>
                 </UserInfo>
 
                 <ViewPoll>View Poll</ViewPoll>
@@ -21,14 +21,16 @@ const Question = () => {
             <Choices>
                 <div className='left-side'>
                     <p>
-                        this is some placeholder text for option number 1
+                        {optionOne.text}
                     </p>
 
                     <button>Vote</button>
                 </div>
 
                 <div className='right-side'>
-                    <p>this is some placeholder text for option number 2</p>
+                    <p>
+                        {optionTwo.text}
+                    </p>
 
                     <button>Vote</button>
                 </div>

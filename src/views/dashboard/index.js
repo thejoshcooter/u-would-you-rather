@@ -7,6 +7,7 @@ import Question from '../../components/Question'
 
 const DashboardView = () => {
     const dispatch = useDispatch()
+    const questions = useSelector((state) => state.questions.data)
     
     useEffect(() => {
         console.log('*** DASHBOARD MOUNTED ***')
@@ -22,7 +23,16 @@ const DashboardView = () => {
             </Tabs>
 
             <Feed>
-                <Question />
+                {questions.map(question => (
+                    <Question 
+                    key={question.id} 
+                    id={question.id}
+                    author={question.author}
+                    timestamp={question.timestamp}
+                    optionOne={question.optionOne}
+                    optionTwo={question.optionTwo}
+                    />
+                ))}
             </Feed>
         </Container>
         </>
@@ -32,7 +42,7 @@ const DashboardView = () => {
 const Container = styled.div`
     width: 100%;
     max-width: 1400px;
-    height: 800px;
+    height: auto;
     margin: 0 auto;
     margin-top: 3rem;
     border: 1px solid black;
