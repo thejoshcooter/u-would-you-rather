@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { Link, useHistory } from 'react-router-dom'
@@ -6,6 +6,10 @@ import { Link, useHistory } from 'react-router-dom'
 const MainMenu = () => {
     const history = useHistory()
     const auth = useSelector((state) => state.auth)
+
+    useEffect(() => {
+        console.log('*** MAIN MENU MOUNTED ***')
+    }, [])
 
     const onLogout = () => {
         localStorage.clear()
@@ -26,10 +30,18 @@ const MainMenu = () => {
                     <Link to='/sandbox'><button>Sandbox</button></Link>
                 </Nav>
 
-                <Account>
-                    <h3>{auth.user}</h3>
-                    <button onClick={onLogout}>Logout</button>
-                </Account>
+                {localStorage.getItem('authenticatedUser') && (
+                    <Account>
+                        <h3>{auth.user}</h3>
+                        <button onClick={onLogout}>Logout</button>
+                    </Account>
+                )}
+
+                {!localStorage.getItem('authenticatedUser') && (
+                    <Account>
+                        <button>Login</button>
+                    </Account>
+                )}
             </Container>
         </Menu>
         </>
