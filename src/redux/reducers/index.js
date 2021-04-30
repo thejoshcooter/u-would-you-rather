@@ -57,6 +57,11 @@ const initialState = {
                 ...state,
                 auth: { ...state.auth, isLoggedIn: true, userId: action.payload.userId, user: action.payload.username, demo: true }
             }
+        case actions.SET_AUTHENTICATED_USER:
+            return {
+                ...state,
+                auth: { ...state.auth, isLoggedIn: true, userId: action.payload.userId, user: action.payload.username, demo: true }
+            }
         default:
             return state
     }

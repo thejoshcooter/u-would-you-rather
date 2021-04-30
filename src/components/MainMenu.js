@@ -1,8 +1,17 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 const MainMenu = () => {
+    const history = useHistory()
+    const auth = useSelector((state) => state.auth)
+
+    const onLogout = () => {
+        localStorage.clear()
+        history.push('/')
+    }
+    
     return (
         <>
         <Menu>
@@ -18,8 +27,8 @@ const MainMenu = () => {
                 </Nav>
 
                 <Account>
-                    <h3>User</h3>
-                    <button>Logout</button>
+                    <h3>{auth.user}</h3>
+                    <button onClick={onLogout}>Logout</button>
                 </Account>
             </Container>
         </Menu>

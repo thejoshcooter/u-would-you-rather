@@ -9,6 +9,7 @@ export const FETCH_QUESTIONS_REQ = 'FETCH_QUESTIONS_REQ'
 export const FETCH_QUESTIONS_SUCCESS = 'FETCH_QUESTIONS_SUCCESS'
 export const FETCH_QUESTIONS_ERROR = 'FETCH_QUESTIONS_ERROR'
 export const DEMO_LOGIN = 'DEMO_LOGIN'
+export const SET_AUTHENTICATED_USER = 'SET_AUTHENTICATED_USER'
 
 // action creators
 export const fetchUsers = () => {
@@ -55,4 +56,8 @@ export const demoLogin = (userId, username) => {
     return (dispatch) => {
         dispatch({ type: DEMO_LOGIN, payload: { userId: userId, username: username } })
     }
+}
+
+export const setAuthenticatedUser = (userId, username) => {
+    return { type: SET_AUTHENTICATED_USER, payload: { userId: userId, username: username } }
 }

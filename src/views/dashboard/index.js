@@ -16,6 +16,11 @@ const DashboardView = () => {
     useEffect(() => {
         console.log('*** DASHBOARD MOUNTED ***')
         dispatch(actions.loadAppData())
+        if (localStorage.getItem('authenticatedUser')) {
+            let userId = JSON.parse(localStorage.getItem('authenticatedUser')).id
+            let username = JSON.parse(localStorage.getItem('authenticatedUser')).name
+            dispatch(actions.setAuthenticatedUser(userId, username))
+        }
     }, [])
 
     const toggleTab = (newTab) => {

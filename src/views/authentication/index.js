@@ -19,6 +19,10 @@ const AuthenticationView = () => {
         if (users.data.length < 1) {
             dispatch(actions.fetchUsers())
         }
+
+        if (localStorage.authenticatedUser) {
+            history.push('/dashboard')
+        }
     },[])
 
     const onChange = (e) => {
@@ -35,6 +39,11 @@ const AuthenticationView = () => {
         let demoUsers = ['Sarah Edo', 'Tyler McGinnis', 'John Doe']
 
         if (demoUsers.includes(form.username) && form.password === auth.demoCredentials) {
+            users.data.map(user => {
+                if (user.name === form.username) {
+                    localStorage.setItem('authenticatedUser', JSON.stringify(user))
+                }
+            })
             dispatch(actions.demoLogin(form.id, form.username))
             history.push('/dashboard')
         } else {
