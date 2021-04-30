@@ -34,7 +34,8 @@ export const fetchQuestions = () => {
         API._getQuestions()
         .then(res => {
             console.log('[SERVER RES]', res)
-            dispatch({ type: FETCH_QUESTIONS_SUCCESS, payload: res })
+            let payload = Object.values(res)
+            dispatch({ type: FETCH_QUESTIONS_SUCCESS, payload: payload })
         })
         .catch(e => {
             dispatch({ type: FETCH_QUESTIONS_ERROR, errors: e })
