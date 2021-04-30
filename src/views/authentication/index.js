@@ -1,28 +1,72 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import { useHistory } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import * as actions from '../../redux/actions'
 
 const AuthenticationView = () => {
+    const dispatch = useDispatch()
+    const history = useHistory()
+    const auth = useSelector((state) => state.auth)
+    const users = useSelector((state) => state.users)
+    const [form, setForm] = useState({
+        id: null,
+        username: '',
+        password: ''
+    })
+
+    useEffect(() => {
+        if (users.data.length < 1) {
+            dispatch(actions.fetchUsers())
+        }
+    },[])
+
+    const onChange = (e) => {
+        setForm({ ...form, [e.target.name]: e.target.value })
+    }
+
+    const selectDemo = (userId, username) => {
+        setForm({ id: userId, username: username, password: 'password123' })
+    }
+
+    const onAuthSubmit = (e) => {
+        e.preventDefault()
+
+        let demoUsers = ['Sarah Edo', 'Tyler McGinnis', 'John Doe']
+
+        if (demoUsers.includes(form.username) && form.password === auth.demoCredentials) {
+            dispatch(actions.demoLogin(form.id, form.username))
+            history.push('/dashboard')
+        } else {
+            console.log('please provide valid credentials!')
+        }
+    }
+    
     return (
         <>
            <Container>
                <Info>
                     <h2>Welcome to Would You Rather?</h2>
                     <p>Please choose a user account to test the app.</p>
-                    <button>John Doe</button>
-                    <button>Jane Doe</button>
-                    <button>Bob Bobberton</button>
+                    {users.data.length > 1 && users.data.map(user => (
+                        <button key={user.id} onClick={() => selectDemo(user.id, user.name)}>{user.name}</button>
+                    ))}
                </Info>
 
                <AuthForm>
-                    <form>
+                    <form onSubmit={onAuthSubmit}>
                         <input 
                             name='username'
                             placeholder='username'
+                            value={form.username}
+                            onChange={onChange}
                         />
 
                         <input 
                             name='password'
                             placeholder='password'
+                            value={form.password}
+                            onChange={onChange}
                         />
 
                         <button>Login</button>

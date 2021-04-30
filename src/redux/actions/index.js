@@ -8,6 +8,7 @@ export const FETCH_USERS_ERROR = 'FETCH_USERS_ERROR'
 export const FETCH_QUESTIONS_REQ = 'FETCH_QUESTIONS_REQ' 
 export const FETCH_QUESTIONS_SUCCESS = 'FETCH_QUESTIONS_SUCCESS'
 export const FETCH_QUESTIONS_ERROR = 'FETCH_QUESTIONS_ERROR'
+export const DEMO_LOGIN = 'DEMO_LOGIN'
 
 // action creators
 export const fetchUsers = () => {
@@ -17,7 +18,8 @@ export const fetchUsers = () => {
         API._getUsers()
         .then(res => {
             console.log('[SERVER RES]', res)
-            dispatch({ type: FETCH_USERS_SUCCESS, payload: res })
+            let payload = Object.values(res)
+            dispatch({ type: FETCH_USERS_SUCCESS, payload: payload })
         })
         .catch(e => {
             dispatch({ type: FETCH_USERS_ERROR, payload: e })
@@ -45,5 +47,11 @@ export const loadAppData = () => {
         console.log('*** LOAD_APP_DATA ACTION ***')
         dispatch(fetchUsers())
         dispatch(fetchQuestions())
+    }
+}
+
+export const demoLogin = (userId, username) => {
+    return (dispatch) => {
+        dispatch({ type: DEMO_LOGIN, payload: { userId: userId, username: username } })
     }
 }

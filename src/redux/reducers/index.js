@@ -2,7 +2,13 @@ import * as actions from '../actions/index'
 
 // temp initial state
 const initialState = {
-    auth: {},
+    auth: {
+        isLoggedIn: false,
+        userId: null,
+        user: null,
+        demo: false,
+        demoCredentials: 'password123'
+    },
     users: {
         fetching: false,
         data: []
@@ -45,6 +51,11 @@ const initialState = {
             return {
                 ...state,
                 questions: { ...state.questions, fetching: false, errors: action.payload }
+            }
+        case actions.DEMO_LOGIN:
+            return {
+                ...state,
+                auth: { ...state.auth, isLoggedIn: true, userId: action.payload.userId, user: action.payload.username, demo: true }
             }
         default:
             return state
