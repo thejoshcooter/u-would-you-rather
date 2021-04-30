@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
 import * as actions from '../../redux/actions/'
@@ -8,31 +8,62 @@ import Question from '../../components/Question'
 const DashboardView = () => {
     const dispatch = useDispatch()
     const questions = useSelector((state) => state.questions.data)
+    const auth = useSelector((state) => state.auth)
+    const [tab, setTab] = useState({
+        value: 'UNANSWERED'
+    })
     
     useEffect(() => {
         console.log('*** DASHBOARD MOUNTED ***')
         dispatch(actions.loadAppData())
     }, [])
+
+    const toggleTab = (newTab) => {
+        setTab({ value: newTab })
+    }
     
     return (
         <>
         <Container>
             <Tabs>
-                <div>Unanswered</div>
-                <div>Answered</div>
+                <div onClick={() => toggleTab('UNANSWERED')}>Unanswered</div>
+                <div onClick={() => toggleTab('ANSWERED')}>Answered</div>
             </Tabs>
 
             <Feed>
-                {questions.map(question => (
-                    <Question 
-                    key={question.id} 
-                    id={question.id}
-                    author={question.author}
-                    timestamp={question.timestamp}
-                    optionOne={question.optionOne}
-                    optionTwo={question.optionTwo}
-                    />
-                ))}
+                {/* if dashboard tab state is set to the default UNANSWERED state then map over all questions and return only questions
+                where the currently auth'd user has not voted yet */}
+                {tab.value === 'UNANSWERED' && questions.map(question => {
+                    if (!question.optionOne.votes.concat(question.optionTwo.votes).includes(auth.userId)) {
+                        return (
+                            <Question 
+                                key={question.id} 
+                                id={question.id}
+                                author={question.author}
+                                timestamp={question.timestamp}
+                                optionOne={question.optionOne}
+                                optionTwo={question.optionTwo}
+                            />
+                        )
+                    }
+                })}
+
+                {/* if dashboard tab state is toggled to ANSWERED then map over all questions and return all questions where
+                the auth'd userid is included as a vote */}
+                {tab.value === 'ANSWERED' && questions.map(question => {
+                    if (question.optionOne.votes.concat(question.optionTwo.votes).includes(auth.userId)) {
+                        return (
+                            <Question 
+                                key={question.id} 
+                                id={question.id}
+                                author={question.author}
+                                timestamp={question.timestamp}
+                                optionOne={question.optionOne}
+                                optionTwo={question.optionTwo}
+                            />
+                        )
+                    }
+}               )}
             </Feed>
         </Container>
         </>

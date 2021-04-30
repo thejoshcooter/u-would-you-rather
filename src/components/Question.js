@@ -11,6 +11,7 @@ const Question = ({ id, author, timestamp, optionOne, optionTwo }) => {
                 <UserInfo>
                     <span className='username'>{author}</span>
                     <span className='date'>posted {timestamp}</span>
+                    <span className='date'>#{id}</span>
                 </UserInfo>
 
                 <ViewPoll>View Poll</ViewPoll>
