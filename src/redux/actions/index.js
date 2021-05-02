@@ -53,8 +53,10 @@ export const loadAppData = () => {
 }
 
 export const demoLogin = (userId, username) => {
-    return (dispatch) => {
-        dispatch({ type: DEMO_LOGIN, payload: { userId: userId, username: username } })
+    return (dispatch, getState) => {
+        let user = getState().users.data.filter(user => user.id === userId)[0]
+        console.log('unicorn', user)
+        dispatch({ type: DEMO_LOGIN, payload: { userId: userId, username: username, avatarURL: user.avatarURL, questions: user.questions, answers: user.answers } })
     }
 }
 

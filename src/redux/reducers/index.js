@@ -7,7 +7,10 @@ const initialState = {
         userId: null,
         user: null,
         demo: false,
-        demoCredentials: 'password123'
+        demoCredentials: 'password123',
+        avatarURL: null,
+        questions: null,
+        answers: null
     },
     users: {
         fetching: false,
@@ -55,7 +58,16 @@ const initialState = {
         case actions.DEMO_LOGIN:
             return {
                 ...state,
-                auth: { ...state.auth, isLoggedIn: true, userId: action.payload.userId, user: action.payload.username, demo: true }
+                auth: { 
+                    ...state.auth, 
+                    isLoggedIn: true, 
+                    userId: action.payload.userId, 
+                    user: action.payload.username, 
+                    demo: true,
+                    avatarURL: action.payload.avatarURL,
+                    questions: action.payload.questions,
+                    answers: action.payload.answers 
+                }
             }
         case actions.SET_AUTHENTICATED_USER:
             return {
