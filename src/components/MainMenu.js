@@ -7,7 +7,6 @@ const MainMenu = () => {
     const history = useHistory()
     const auth = useSelector((state) => state.auth)
     const user = useSelector(state => state.users.data).filter(user => user.id === auth.userId)[0]
-    console.log('USER CHECK ', user)
 
     useEffect(() => {
         console.log('*** MAIN MENU MOUNTED ***')
