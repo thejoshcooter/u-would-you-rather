@@ -60,6 +60,6 @@ export const demoLogin = (userId, username) => {
     }
 }
 
-export const setAuthenticatedUser = (userId, username) => {
-    return { type: SET_AUTHENTICATED_USER, payload: { userId: userId, username: username } }
+export const setAuthenticatedUser = (user) => {
+    return { type: SET_AUTHENTICATED_USER, payload: user }
 }

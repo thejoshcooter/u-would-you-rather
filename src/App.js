@@ -1,5 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Route } from 'react-router-dom'
+
+import * as actions from './redux/actions'
+import { useDispatch } from 'react-redux'
 
 import MainMenu from './components/MainMenu'
 import AuthenticationView from './views/authentication'
@@ -10,6 +13,15 @@ import PollView from './views/poll'
 import Sandbox from './views/sandbox'
 
 const App = () => {
+  const dispatch = useDispatch()
+  
+  useEffect(() => {
+    if (localStorage.getItem('authenticatedUser')) {
+      let authUser = JSON.parse(localStorage.getItem('authenticatedUser'))
+      dispatch(actions.setAuthenticatedUser(authUser))
+    }
+  }, [])
+  
   return (
     <>
       <Route path='/' component={MainMenu} />

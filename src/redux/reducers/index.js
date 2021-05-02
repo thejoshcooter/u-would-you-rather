@@ -72,7 +72,16 @@ const initialState = {
         case actions.SET_AUTHENTICATED_USER:
             return {
                 ...state,
-                auth: { ...state.auth, isLoggedIn: true, userId: action.payload.userId, user: action.payload.username, demo: true }
+                auth: { 
+                    ...state.auth, 
+                    isLoggedIn: true, 
+                    userId: action.payload.id, 
+                    user: action.payload.name, 
+                    demo: true,
+                    avatarURL: action.payload.avatarURL,
+                    questions: action.payload.questions,
+                    answers: action.payload.answers 
+                }
             }
         default:
             return state

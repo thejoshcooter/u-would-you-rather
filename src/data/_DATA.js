@@ -14,7 +14,7 @@ let users = {
     tylermcginnis: {
       id: 'tylermcginnis',
       name: 'Tyler McGinnis',
-      avatarURL: '',
+      avatarURL: 'https://eskipaper.com/images/kirito-1.jpg',
       answers: {
         "vthrdm985a262al8qx3do": 'optionOne',
         "xj352vofupe1dqz9emx13r": 'optionTwo',
@@ -24,7 +24,7 @@ let users = {
     johndoe: {
       id: 'johndoe',
       name: 'John Doe',
-      avatarURL: '',
+      avatarURL: 'https://th.bing.com/th/id/R471f85bde2d1f293a9dfb113ba94e5f3?rik=2EKYUvnCgH5ChA&pid=ImgRaw',
       answers: {
         "xj352vofupe1dqz9emx13r": 'optionOne',
         "vthrdm985a262al8qx3do": 'optionTwo',

@@ -34,7 +34,7 @@ const MainMenu = () => {
 
                 {localStorage.getItem('authenticatedUser') && (
                     <Account>
-                        <Avatar image={''}>
+                        <Avatar image={auth.avatarURL}>
                         </Avatar>
                         <h3>{auth.user}</h3>
                         <button onClick={onLogout}>Logout</button>
