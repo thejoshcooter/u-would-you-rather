@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 const Question = ({ id, author, timestamp, optionOne, optionTwo }) => {
     return (
@@ -14,7 +15,7 @@ const Question = ({ id, author, timestamp, optionOne, optionTwo }) => {
                     <span className='date'>#{id}</span>
                 </UserInfo>
 
-                <ViewPoll>View Poll</ViewPoll>
+                <Link to={`/questions/${id}`}><ViewPoll>View Poll</ViewPoll></Link>
             </Header>
 
             <Title>Would You Rather...</Title>
