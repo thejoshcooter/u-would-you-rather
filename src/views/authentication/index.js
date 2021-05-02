@@ -96,7 +96,8 @@ const Container = styled.div`
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid black;
+    background-color: rgba(0, 0, 0, 0.2);
+    box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
 `
 
 const Info = styled.div`
@@ -106,6 +107,26 @@ const Info = styled.div`
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
+    background-color: #0066FF;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    color: #fff;
+
+    button {
+        width: 15rem;
+        height: 2rem;
+        margin: 0.5rem 0;
+        background-color: transparent;
+        border-radius: 3px;
+        border: 1px solid #fff;
+        color: #fff;
+    }
+
+    button:hover {
+        background-color: #fff;
+        color: #0066FF;
+        transition: 0.5s;
+    }
 `
 
 const AuthForm = styled.div`
@@ -115,13 +136,24 @@ const AuthForm = styled.div`
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
-    border-left: 1px solid black;
 
     form {
         display: flex;
         flex-flow: column nowrap;
         justify-content: center;
         align-items: center;
+
+        input {
+            width: 15rem;
+            height: 2rem;
+            margin: 0.2rem 0;
+        }
+
+        button {
+            width: 15.5rem;
+            height: 2rem;
+            margin-top: 1rem;
+        }
     }
 `
 
