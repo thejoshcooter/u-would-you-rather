@@ -2,7 +2,7 @@ let users = {
     sarahedo: {
       id: 'sarahedo',
       name: 'Sarah Edo',
-      avatarURL: '',
+      avatarURL: 'https://th.bing.com/th/id/Re67e914432328dd83626e315f1568f63?rik=aKT93stm8V6pHA&riu=http%3a%2f%2fdiscordemoji.com%2fassets%2femoji%2fSmillingZeroTwo.png&ehk=rr%2f%2fLHJdpJxnp59zVZO6aMJBuH17dtpCmxwwdADxm64%3d&risl=&pid=ImgRaw',
       answers: {
         "8xf0y6ziyjabvozdd253nd": 'optionOne',
         "6ni6ok3ym7mf1p33lnez": 'optionTwo',
