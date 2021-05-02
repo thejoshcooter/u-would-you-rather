@@ -26,8 +26,8 @@ const DashboardView = () => {
         <>
         <Container>
             <Tabs>
-                <div onClick={() => toggleTab('UNANSWERED')}>Unanswered</div>
-                <div onClick={() => toggleTab('ANSWERED')}>Answered</div>
+                <div style={{ backgroundColor: tab.value === 'UNANSWERED' ? '#0066FF' : 'transparent', color: tab.value === 'UNANSWERED' ? '#fff' : '#000' }} onClick={() => toggleTab('UNANSWERED')}>Unanswered</div>
+                <div style={{ backgroundColor: tab.value === 'ANSWERED' ? '#0066FF' : 'transparent', color: tab.value === 'ANSWERED' ? '#fff' : '#000' }} onClick={() => toggleTab('ANSWERED')}>Answered</div>
             </Tabs>
 
             <Feed>
@@ -76,7 +76,6 @@ const Container = styled.div`
     height: auto;
     margin: 0 auto;
     margin-top: 3rem;
-    border: 1px solid black;
 `
 
 const Tabs = styled.div`
@@ -85,7 +84,7 @@ const Tabs = styled.div`
     flex-flow: row nowrap;
     justify-content: center;
     align-items: center;
-    border-bottom: 1px solid black;
+    margin: 2rem 0;
 
     div {
         width: 10rem;
@@ -95,7 +94,7 @@ const Tabs = styled.div`
         flex-flow: column nowrap;
         justify-content: center;
         align-items: center;
-        border: 1px solid black;
+        border-radius: 3px;
     }
 `
 
