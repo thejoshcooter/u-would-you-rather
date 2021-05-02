@@ -37,7 +37,7 @@ const MainMenu = () => {
                         <Avatar image={auth.avatarURL}>
                         </Avatar>
                         <h3>{auth.user}</h3>
-                        <button onClick={onLogout}>Logout</button>
+                        <button onClick={onLogout}><i className="fas fa-sign-out-alt"></i></button>
                     </Account>
                 )}
 
@@ -54,7 +54,7 @@ const MainMenu = () => {
 
 const Menu = styled.div`
     width: 100%;
-    height: 3rem;
+    height: 4rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 `
 
@@ -104,6 +104,21 @@ const Account = styled.div`
     flex-flow: row nowrap;
     justify-content: space-around;
     align-items: center;
+
+    h3 {
+        margin: 0 0.5rem;
+    }
+
+    button {
+        border: none;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.25rem;
+        margin-left: 1rem;
+    }
+
+    button:hover {
+        color: red;
+    }
 `
 
 const Avatar = styled.div`
@@ -112,6 +127,9 @@ const Avatar = styled.div`
     border-radius: 100px;
     background-image: url(${props => props.image});
     background-size: cover;
+    border: 2px solid rgba(0, 0, 0, 0.5);
+    margin: 0 0.5rem;
+    box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
 `
 
 export default MainMenu
