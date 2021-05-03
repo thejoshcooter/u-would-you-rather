@@ -10,12 +10,12 @@ import DashboardView from './views/dashboard'
 import LeaderboardView from './views/leaderboard'
 import CreateQuestionView from './views/create-question'
 import PollView from './views/poll'
-import Sandbox from './views/sandbox'
 
 const App = () => {
   const dispatch = useDispatch()
-  
+
   useEffect(() => {
+    dispatch(actions.loadAppData())
     if (localStorage.getItem('authenticatedUser')) {
       let authUser = JSON.parse(localStorage.getItem('authenticatedUser'))
       dispatch(actions.setAuthenticatedUser(authUser))
@@ -30,7 +30,6 @@ const App = () => {
       <Route path='/leaderboard' component={LeaderboardView} />
       <Route path='/create' component={CreateQuestionView} />
       <Route path='/questions/:id' component={PollView} />
-      <Route path='/sandbox' component={Sandbox} />
     </>
   );
 }

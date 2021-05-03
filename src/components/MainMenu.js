@@ -28,7 +28,6 @@ const MainMenu = () => {
                     <Link to='/dashboard'><button>Dashboard</button></Link>
                     <Link to='/leaderboard'><button>Leaderboard</button></Link>
                     <Link to='/create'><button>Create Question</button></Link>
-                    <Link to='/sandbox'><button>Sandbox</button></Link>
                 </Nav>
 
                 {localStorage.getItem('authenticatedUser') && (
