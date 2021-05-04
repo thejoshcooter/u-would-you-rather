@@ -10,6 +10,9 @@ export const FETCH_QUESTIONS_SUCCESS = 'FETCH_QUESTIONS_SUCCESS'
 export const FETCH_QUESTIONS_ERROR = 'FETCH_QUESTIONS_ERROR'
 export const DEMO_LOGIN = 'DEMO_LOGIN'
 export const SET_AUTHENTICATED_USER = 'SET_AUTHENTICATED_USER'
+export const CREATE_QUESTION_REQ = 'CREATE_QUESTION_REQ'
+export const CREATE_QUESTION_SUCCESS = 'CREATE_QUESTION_SUCCESS'
+export const CREATE_QUESTION_ERROR = 'CREATE_QUESTION_ERROR'
 
 // action creators
 export const fetchUsers = () => {
@@ -62,4 +65,16 @@ export const demoLogin = (userId, username) => {
 
 export const setAuthenticatedUser = (user) => {
     return { type: SET_AUTHENTICATED_USER, payload: user }
+}
+
+export const createQuestion = (opt1, opt2, author) => {
+    return (dispatch) => {
+        let question = { optionOneText: opt1, optionTwoText: opt2, author }
+        dispatch({ type: CREATE_QUESTION_REQ })
+        API._saveQuestion(question)
+        .then( res => {
+            console.log('[server res]', res)
+        })
+        .catch(e => console.error(e))
+    }
 }

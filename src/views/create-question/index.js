@@ -1,23 +1,50 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+import { useSelector, useDispatch } from 'react-redux'
+import * as actions from '../../redux/actions'
 
 const CreateQuestionView = () => {
+    const dispatch = useDispatch()
+    const user = useSelector(state => state.auth.userId)
+
+    const [form, setForm] = useState({
+        optionOneText: '',
+        optionTwoText: '',
+        author: null
+    })
+
+    const onChange = (e) => {
+        setForm({ ...form, author: user, [e.target.name]: e.target.value })
+        console.log(form)
+    }
+
+    const onSubmit = (e) => {
+        e.preventDefault()
+        dispatch(actions.createQuestion(form.optionOneText, form.optionTwoText, form.author))
+    }
+    
     return (
         <>
             <Container>
-                <QuestionForm>
+                <QuestionForm onSubmit={onSubmit}>
                     <h3>Create a Question</h3>
                     <span>Would you rather...</span>
                     <input 
-                        name='option1'
+                        type='text'
+                        name='optionOneText'
                         placeholder='enter option 1'
+                        value={form.optionOneText}
+                        onChange={onChange}
                     />
 
                     <span>or</span>
 
                     <input 
-                        name='option2'
+                        type='text'
+                        name='optionTwoText'
                         placeholder='enter option 2'
+                        value={form.optionTwoText}
+                        onChange={onChange}
                     />
 
                     <button>Submit</button>
