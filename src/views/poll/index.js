@@ -13,6 +13,7 @@ const PollView = () => {
     console.log('[CHECK QUESTION DATA]', question)
 
     useEffect(() => {
+        console.log('[data on pollview] ', question)
         if (question === undefined) {
             dispatch(actions.loadAppData())
         }

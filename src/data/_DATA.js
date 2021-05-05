@@ -196,7 +196,7 @@ let users = {
           }
         }
   
-        res()
+        res(questions)
       }, 500)
     })
   }

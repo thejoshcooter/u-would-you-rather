@@ -1,10 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import * as actions from '../redux/actions'
 
 const Question = ({ id, author, timestamp, optionOne, optionTwo }) => {
+    const dispatch = useDispatch()
     const op = useSelector(state => state.users.data).filter(user => user.id === author)[0]
+
+    const onVoteSubmit = (qid, answer) => {
+        dispatch(actions.saveAnswer(qid, answer))
+    }
+    
     
     return (
         <>
@@ -29,7 +36,7 @@ const Question = ({ id, author, timestamp, optionOne, optionTwo }) => {
                         {optionOne.text}
                     </p>
 
-                    <button>Vote</button>
+                    <button onClick={() => onVoteSubmit(id, 'optionOne')}>Vote</button>
                 </div>
 
                 <div className='right-side'>
@@ -37,7 +44,7 @@ const Question = ({ id, author, timestamp, optionOne, optionTwo }) => {
                         {optionTwo.text}
                     </p>
 
-                    <button>Vote</button>
+                    <button onClick={() => onVoteSubmit(id, 'optionTwo')}>Vote</button>
                 </div>
             </Choices>
 

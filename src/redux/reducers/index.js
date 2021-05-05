@@ -83,6 +83,8 @@ const initialState = {
                     answers: action.payload.answers 
                 }
             }
+        case actions.SAVE_ANSWER_REQ:
+            console.log('save question reducer firing!')
         default:
             return state
     }

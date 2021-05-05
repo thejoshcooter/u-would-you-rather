@@ -13,6 +13,9 @@ export const SET_AUTHENTICATED_USER = 'SET_AUTHENTICATED_USER'
 export const CREATE_QUESTION_REQ = 'CREATE_QUESTION_REQ'
 export const CREATE_QUESTION_SUCCESS = 'CREATE_QUESTION_SUCCESS'
 export const CREATE_QUESTION_ERROR = 'CREATE_QUESTION_ERROR'
+export const SAVE_ANSWER_REQ = 'SAVE_ANSWER_REQ'
+export const SAVE_ANSWER_SUCCESS = 'SAVE_ANSWER_SUCCESS'
+export const SAVE_ANSWER_ERROR = 'SAVE_ANSWER_ERROR'
 
 // action creators
 export const fetchUsers = () => {
@@ -58,7 +61,6 @@ export const loadAppData = () => {
 export const demoLogin = (userId, username) => {
     return (dispatch, getState) => {
         let user = getState().users.data.filter(user => user.id === userId)[0]
-        console.log('unicorn', user)
         dispatch({ type: DEMO_LOGIN, payload: { userId: userId, username: username, avatarURL: user.avatarURL, questions: user.questions, answers: user.answers } })
     }
 }
@@ -74,6 +76,30 @@ export const createQuestion = (opt1, opt2, author) => {
         API._saveQuestion(question)
         .then( res => {
             console.log('[server res]', res)
+        })
+        .catch(e => console.error(e))
+    }
+}
+
+// broken af
+
+export const saveAnswer = (qid, answer) => {
+    return (dispatch, getState) => {
+        const authedUser = getState().auth.userId
+        console.log('authedUser: ', authedUser)
+        dispatch({ type: SAVE_ANSWER_REQ })
+        console.log('authedUser: ', authedUser, 'qid: ', qid, 'answer: ', answer)
+        API._saveQuestionAnswer({ authedUser, qid, answer })
+        .then(res => {
+            API._getQuestions()
+            .then(res => {
+                console.log('[SERVER RES]', res)
+                let payload = Object.values(res)
+                dispatch({ type: FETCH_QUESTIONS_SUCCESS, payload: payload })
+            })
+            .catch(e => {
+                dispatch({ type: FETCH_QUESTIONS_ERROR, errors: e })
+            })
         })
         .catch(e => console.error(e))
     }
