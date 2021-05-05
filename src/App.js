@@ -16,7 +16,10 @@ const App = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
+    console.log('*** APP MOUNTED ***')
+
     dispatch(actions.loadAppData())
+    
     if (localStorage.getItem('authenticatedUser')) {
       let authUser = JSON.parse(localStorage.getItem('authenticatedUser'))
       dispatch(actions.setAuthenticatedUser(authUser))

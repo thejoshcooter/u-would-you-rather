@@ -20,7 +20,6 @@ export const SAVE_ANSWER_ERROR = 'SAVE_ANSWER_ERROR'
 // action creators
 export const fetchUsers = () => {
     return (dispatch) => {
-        console.log('*** FETCH_USERS ACTION **')
         dispatch({ type: FETCH_USERS_REQ })
         API._getUsers()
         .then(res => {
@@ -36,7 +35,6 @@ export const fetchUsers = () => {
 
 export const fetchQuestions = () => {
     return (dispatch) => {
-        console.log('*** FETCH_QUESTIONS ACTION ***')
         dispatch({ type: FETCH_QUESTIONS_REQ })
         API._getQuestions()
         .then(res => {
@@ -81,14 +79,12 @@ export const createQuestion = (opt1, opt2, author) => {
     }
 }
 
-// broken af
-
 export const saveAnswer = (qid, answer) => {
     return (dispatch, getState) => {
         const authedUser = getState().auth.userId
-        console.log('authedUser: ', authedUser)
+
         dispatch({ type: SAVE_ANSWER_REQ })
-        console.log('authedUser: ', authedUser, 'qid: ', qid, 'answer: ', answer)
+
         API._saveQuestionAnswer({ authedUser, qid, answer })
         .then(res => {
             API._getQuestions()

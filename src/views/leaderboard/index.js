@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import * as actions from '../../redux/actions'
 
 import UserCard from './UserCard'
 
 const LeaderboardView = () => {
+    const dispatch = useDispatch()
     const users = useSelector(state => state.users.data)
                     .map(user => {
                         let score = user.questions.length + Object.keys(user.answers).length
@@ -13,8 +15,9 @@ const LeaderboardView = () => {
                     .sort((a, b) => b.score - a.score)
 
     useEffect(() => {
-        
-    }, [])
+        console.log('*** LEADERBOARD VIEW MOUNTED ***')
+        dispatch(actions.fetchUsers())
+    }, [users])
     
     return (
         <>
