@@ -24,7 +24,6 @@ const MainMenu = () => {
                 <Logo><span>Would You Rather?</span></Logo>
 
                 <Nav>
-                    <Link to='/'><button>Authentication</button></Link>
                     <Link to='/dashboard'><button>Dashboard</button></Link>
                     <Link to='/leaderboard'><button>Leaderboard</button></Link>
                     <Link to='/create'><button>Create Question</button></Link>
@@ -41,7 +40,7 @@ const MainMenu = () => {
 
                 {!localStorage.getItem('authenticatedUser') && (
                     <Account>
-                        <button>Login</button>
+                        <Link to='/'><button>Login</button></Link>
                     </Account>
                 )}
             </Container>

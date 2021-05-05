@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom'
 
 import * as actions from './redux/actions'
 import { useDispatch } from 'react-redux'
+import PrivateRoute from './utils/PrivateRoute'
 
 import MainMenu from './components/MainMenu'
 import AuthenticationView from './views/authentication'
@@ -26,10 +27,10 @@ const App = () => {
     <>
       <Route path='/' component={MainMenu} />
       <Route exact path='/' component={AuthenticationView} />
-      <Route path='/dashboard' component={DashboardView} />
-      <Route path='/leaderboard' component={LeaderboardView} />
-      <Route path='/create' component={CreateQuestionView} />
-      <Route path='/questions/:id' component={PollView} />
+      <PrivateRoute path='/dashboard' component={DashboardView} />
+      <PrivateRoute path='/leaderboard' component={LeaderboardView} />
+      <PrivateRoute path='/create' component={CreateQuestionView} />
+      <PrivateRoute path='/questions/:id' component={PollView} />
     </>
   );
 }
