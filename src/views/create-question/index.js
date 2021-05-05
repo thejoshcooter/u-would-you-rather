@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import * as actions from '../../redux/actions'
 
 const CreateQuestionView = () => {
     const dispatch = useDispatch()
     const user = useSelector(state => state.auth.userId)
+    const history = useHistory()
 
     const [form, setForm] = useState({
         optionOneText: '',
@@ -21,6 +23,7 @@ const CreateQuestionView = () => {
     const onSubmit = (e) => {
         e.preventDefault()
         dispatch(actions.createQuestion(form.optionOneText, form.optionTwoText, form.author))
+        history.push('/dashboard')
     }
     
     return (
