@@ -85,8 +85,6 @@ const initialState = {
             }
         case actions.SAVE_ANSWER_REQ:
             console.log('save question reducer firing!')
-        case actions.PURGE:
-            return initialState
         default:
             return state
     }
