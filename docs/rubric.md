@@ -48,7 +48,7 @@
 
 [x] A polling question links to details of that poll.
 
-[] The polls in both categories are arranged from the most recently created (top) to the least recently created (bottom).
+[x] The polls in both categories are arranged from the most recently created (top) to the least recently created (bottom).
 
 **Are the details of each poll displayed with all of the relevant information?**
 

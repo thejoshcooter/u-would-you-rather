@@ -90,7 +90,7 @@ export const saveAnswer = (qid, answer) => {
             API._getQuestions()
             .then(res => {
                 console.log('[SERVER RES]', res)
-                let payload = Object.values(res)
+                let payload = Object.values(res).sort((a,b) => b.timestamp - a.timestamp )
                 dispatch({ type: FETCH_QUESTIONS_SUCCESS, payload: payload })
             })
             .catch(e => {
