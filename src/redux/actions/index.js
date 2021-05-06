@@ -1,6 +1,7 @@
 import * as API from '../../data/_DATA'
 
 // actions
+export const PURGE = 'PURGE'
 export const LOAD_APP_DATA = 'LOAD_APP_DATA'
 export const FETCH_USERS_REQ = 'FETCH_USERS_REQ'
 export const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS'
@@ -99,4 +100,8 @@ export const saveAnswer = (qid, answer) => {
         })
         .catch(e => console.error(e))
     }
+}
+
+export const purge = () => {
+    return { type: PURGE }
 }
