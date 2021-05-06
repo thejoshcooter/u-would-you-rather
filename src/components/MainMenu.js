@@ -16,7 +16,6 @@ const MainMenu = () => {
 
     const onLogout = () => {
         localStorage.clear()
-        // dispatch(actions.purge())
         history.push('/')
     }
     
