@@ -32,7 +32,7 @@ const App = () => {
       <Route exact path='/' component={AuthenticationView} />
       <PrivateRoute path='/dashboard' component={DashboardView} />
       <PrivateRoute path='/leaderboard' component={LeaderboardView} />
-      <PrivateRoute path='/create' component={CreateQuestionView} />
+      <PrivateRoute path='/add' component={CreateQuestionView} />
       <PrivateRoute path='/questions/:id' component={PollView} />
     </>
   );

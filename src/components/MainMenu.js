@@ -28,7 +28,7 @@ const MainMenu = () => {
                 <Nav>
                     <Link to='/dashboard'><button>Dashboard</button></Link>
                     <Link to='/leaderboard'><button>Leaderboard</button></Link>
-                    <Link to='/create'><button>Create Question</button></Link>
+                    <Link to='/add'><button>Create Question</button></Link>
                 </Nav>
 
                 {localStorage.getItem('authenticatedUser') && (
