@@ -43,6 +43,7 @@ const DashboardView = () => {
                                 timestamp={question.timestamp}
                                 optionOne={question.optionOne}
                                 optionTwo={question.optionTwo}
+                                tab={tab.value}
                             />
                         )
                     }
@@ -60,6 +61,7 @@ const DashboardView = () => {
                                 timestamp={question.timestamp}
                                 optionOne={question.optionOne}
                                 optionTwo={question.optionTwo}
+                                tab={tab.value}
                             />
                         )
                     }

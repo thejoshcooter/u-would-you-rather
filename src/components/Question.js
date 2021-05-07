@@ -1,12 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import * as actions from '../redux/actions'
 
-const Question = ({ id, author, timestamp, optionOne, optionTwo }) => {
+const Question = ({ id, author, timestamp, optionOne, optionTwo, tab }) => {
     const dispatch = useDispatch()
     const op = useSelector(state => state.users.data).filter(user => user.id === author)[0]
+    const authUser = useSelector(state => state.auth.userId)
+
+    const determineUserVote = (optOneVotes, optTwoVotes) => {
+        if (optOneVotes.includes(authUser)) {
+            return 'optionOne'
+        } else if (optTwoVotes.includes(authUser)) {
+            return 'optionTwo'
+        } else {
+            return null
+        }
+    }
+
+    const userVote = determineUserVote(optionOne.votes, optionTwo.votes)
 
     const onVoteSubmit = (qid, answer) => {
         dispatch(actions.saveAnswer(qid, answer))
@@ -25,7 +38,9 @@ const Question = ({ id, author, timestamp, optionOne, optionTwo }) => {
                     <span className='date'>#{id}</span>
                 </UserInfo>
 
-                <Link className='viewPoll' to={`/questions/${id}`}><ViewPoll>View Poll</ViewPoll></Link>
+                {tab === 'ANSWERED' && (
+                    <Link className='viewPoll' to={`/questions/${id}`}><ViewPoll>View Poll</ViewPoll></Link>
+                )}
             </Header>
 
             <Title>Would You Rather...</Title>
@@ -36,7 +51,12 @@ const Question = ({ id, author, timestamp, optionOne, optionTwo }) => {
                         {optionOne.text}
                     </p>
 
-                    <button onClick={() => onVoteSubmit(id, 'optionOne')}>Vote</button>
+                    {tab ==='UNANSWERED' && (
+                        <button onClick={() => onVoteSubmit(id, 'optionOne')}>Vote</button>
+                    )}
+                    {tab === 'ANSWERED' && userVote === 'optionOne' && (
+                        <button>Your Choice</button>
+                    )}
                 </div>
 
                 <div className='right-side'>
@@ -44,9 +64,16 @@ const Question = ({ id, author, timestamp, optionOne, optionTwo }) => {
                         {optionTwo.text}
                     </p>
 
-                    <button onClick={() => onVoteSubmit(id, 'optionTwo')}>Vote</button>
+                    {tab === 'UNANSWERED' && (
+                        <button onClick={() => onVoteSubmit(id, 'optionTwo')}>Vote</button>
+                    )}
+                    {tab === 'ANSWERED' && userVote === 'optionTwo' && (
+                        <button>Your Choice</button>
+                    )}
                 </div>
             </Choices>
+
+            {/* <p>You voted: {userVote}</p> */}
 
         </Container>
         </>
@@ -138,32 +165,40 @@ const Title = styled.h1`
 const Choices = styled.div`
     width: 100%;
     height: 100%;
+    min-height: 10rem;
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
     margin-top: 2rem;
+    // background-color: purple;
 
     .left-side {
         width: 50%;
-        height: 90%;
+        // height: 90%;
     }
 
     .right-side {
         width: 50%;
-        height: 90%;
+        // height: 90%;
         border-left: 2px solid rgba(0, 0, 0, 0.5);
     }
 
     .left-side, .right-side {
+        height: 100%;
+        min-height: 10rem;
         display: flex;
         flex-flow: column nowrap;
         justify-content: center;
         align-items: center;
+        // background-color: red;
+
+        p {
+            margin-bottom: auto;
+        }
     }
 
     button {
-        margin-top: auto;
         width: 7rem;
         height: 2rem;
         border-radius: 3px;
