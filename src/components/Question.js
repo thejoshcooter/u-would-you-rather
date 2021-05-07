@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import * as actions from '../redux/actions'
 
 const Question = ({ id, author, timestamp, optionOne, optionTwo, tab }) => {
+    const history = useHistory()
     const dispatch = useDispatch()
     const op = useSelector(state => state.users.data).filter(user => user.id === author)[0]
     const authUser = useSelector(state => state.auth.userId)
@@ -23,6 +24,7 @@ const Question = ({ id, author, timestamp, optionOne, optionTwo, tab }) => {
 
     const onVoteSubmit = (qid, answer) => {
         dispatch(actions.saveAnswer(qid, answer))
+        history.push(`/questions/${qid}`)
     }
     
     
