@@ -33,7 +33,7 @@ const App = () => {
       <PrivateRoute path='/dashboard' component={DashboardView} />
       <PrivateRoute path='/leaderboard' component={LeaderboardView} />
       <PrivateRoute path='/add' component={CreateQuestionView} />
-      <PrivateRoute path='/questions/:id' component={PollView} />
+      <PrivateRoute path='/questions/:id/results' component={PollView} />
     </>
   );
 }

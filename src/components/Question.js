@@ -24,7 +24,7 @@ const Question = ({ id, author, timestamp, optionOne, optionTwo, tab }) => {
 
     const onVoteSubmit = (qid, answer) => {
         dispatch(actions.saveAnswer(qid, answer))
-        history.push(`/questions/${qid}`)
+        history.push(`/questions/${qid}/results`)
     }
     
     
@@ -41,7 +41,7 @@ const Question = ({ id, author, timestamp, optionOne, optionTwo, tab }) => {
                 </UserInfo>
 
                 {tab === 'ANSWERED' && (
-                    <Link className='viewPoll' to={`/questions/${id}`}><ViewPoll>View Poll</ViewPoll></Link>
+                    <Link className='viewPoll' to={`/questions/${id}/results`}><ViewPoll>View Poll</ViewPoll></Link>
                 )}
             </Header>
 
