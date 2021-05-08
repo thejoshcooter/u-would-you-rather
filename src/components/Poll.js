@@ -11,6 +11,7 @@ const Poll = ({ question }) => {
     const optionOnePercent = (question.optionOne.votes.length / totalVotes) * 100
     const optionTwoPercent = (question.optionTwo.votes.length / totalVotes) * 100
     
+    
     return (
         <>
         <Container>
@@ -28,7 +29,10 @@ const Poll = ({ question }) => {
                 <VoteBar>
                     <ProgressBar progress={optionOnePercent}/>
                 </VoteBar>
-                <p>Vote Percent: {optionOnePercent}</p>
+                <p>Number of votes: {question.optionOne.votes.length} Vote Percent: {optionOnePercent}</p>
+                {question.optionOne.votes.includes('sarahedo') && (
+                    <UserVote>Your Vote</UserVote>
+                )}
             </Option>
 
             <Option>
@@ -36,7 +40,10 @@ const Poll = ({ question }) => {
                 <VoteBar>
                     <ProgressBar progress={optionTwoPercent}/>
                 </VoteBar>
-                <p>Vote Percent: {optionTwoPercent}</p>
+                <p>Number of votes: {question.optionTwo.votes.length} Vote Percent: {optionTwoPercent}</p>
+                {question.optionTwo.votes.includes('sarahedo') && (
+                    <UserVote>Your Vote</UserVote>
+                )}
             </Option>
 
             <p>Total Votes: {totalVotes}</p>
@@ -100,17 +107,21 @@ const Info = styled.div`
 
 const Option = styled.div`
     width: 100%;
-    height: 10rem;
+    min-height: 10rem;
     margin: 1rem 0;
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
+
+    p {
+        font-size: 0.8rem;
+    }
 `
 
 const VoteBar = styled.div`
     width: 80%;
-    height: 3rem;
+    height: 2rem;
     border-radius: 3px;
     border: 2px solid rgba(0, 0, 0, 0.2);
 `
@@ -119,6 +130,16 @@ const ProgressBar = styled.div`
     width: ${props => `${props.progress}%`};
     height: 100%;
     background-color: #0066FF;
+`
+
+const UserVote = styled.button`
+    width: 10rem;
+    margin: 1rem 0;
+    border-radius: 3px;
+    border: 1px solid #0066FF;
+    background-color: transparent;
+    padding: 1rem;
+    color: #0066FF;
 `
 
 export default Poll

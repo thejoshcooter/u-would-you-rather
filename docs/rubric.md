@@ -54,19 +54,19 @@
 
 [x] The details of the poll are available at questions/:question_id.
 
-[] When a poll is clicked on the home page, the following is shown: 
+[x] When a poll is clicked on the home page, the following is shown: 
     
     - the text “Would You Rather”
     - the picture of the user who posted the polling question; and
     - the two options.
 
-[] For answered polls, each of the two options contains the following:
+[x] For answered polls, each of the two options contains the following:
 
     the text of the option
     the number of people who voted for that option
     the percentage of people who voted for that option
 
-[] The option selected by the logged in user should be clearly marked.
+[x] The option selected by the logged in user should be clearly marked.
 
 [x] When the user is logged in, the details of the poll are shown. If the user is logged out, he/she is asked to log in before before being able to access the poll.
 
