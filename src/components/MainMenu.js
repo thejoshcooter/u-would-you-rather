@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { Link, useHistory } from 'react-router-dom'
 import * as actions from '../redux/actions'
 
 const MainMenu = () => {
-    const dispatch = useDispatch()
     const history = useHistory()
+    const dispatch = useDispatch()
     const auth = useSelector((state) => state.auth)
     const user = useSelector(state => state.users.data).filter(user => user.id === auth.userId)[0]
 
@@ -15,7 +15,7 @@ const MainMenu = () => {
     }, [])
 
     const onLogout = () => {
-        localStorage.clear()
+        dispatch(actions.logout())
         history.push('/')
     }
     

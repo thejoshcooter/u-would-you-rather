@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -15,62 +15,20 @@ const AuthenticationView = () => {
         password: ''
     })
 
-    useEffect(() => {
-        if (users.data.length < 1) {
-            dispatch(actions.fetchUsers())
-        }
-
-        if (localStorage.authenticatedUser) {
-            history.push('/dashboard')
-        }
-    },[])
-
     const onChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value })
     }
-
-    // const selectDemo = (userId, username) => {
-    //     setForm({ id: userId, username: username, password: 'password123' })
-    // }
 
     const selectDemo = (user) => {
         setForm({ id: user.id, username: user.name, password: 'password123' })
     }
 
-    // const onAuthSubmit = (e) => {
-    //     e.preventDefault()
-
-    //     let demoUsers = ['Sarah Edo', 'Tyler McGinnis', 'John Doe']
-
-    //     if (demoUsers.includes(form.username) && form.password === auth.demoCredentials) {
-    //         users.data.map(user => {
-    //             if (user.name === form.username) {
-    //                 localStorage.setItem('authenticatedUser', JSON.stringify(user))
-    //             }
-    //         })
-    //         dispatch(actions.demoLogin(form.id, form.username))
-    //         history.push('/dashboard')
-    //     } else {
-    //         console.log('please provide valid credentials!')
-    //     }
-    // }
 
     const onAuthSubmit = (e) => {
         e.preventDefault()
 
-        let demoUsers = ['sarahedo', 'tylermcginnis', 'johndoe']
-
-        if (demoUsers.includes(form.id) && form.password === auth.demoCredentials) {
-            users.data.map(user => {
-                if (user.id === form.id) {
-                    localStorage.setItem('authenticatedUser', JSON.stringify(user))
-                    dispatch(actions.setAuthenticatedUser(user))
-                }
-            })
-            history.push('/dashboard')
-        } else {
-            console.log('please provide valid credentials!')
-        }
+        // let demoUsers = ['sarahedo', 'tylermcginnis', 'johndoe']
+        dispatch(actions.demoLogin(form, history))
     }
     
     return (
