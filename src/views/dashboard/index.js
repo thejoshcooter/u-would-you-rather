@@ -9,6 +9,7 @@ const DashboardView = () => {
     const dispatch = useDispatch()
     const questions = useSelector((state) => state.questions.data)
     const auth = useSelector((state) => state.auth)
+    const answers = useSelector(state => state.auth.answers)
     const [tab, setTab] = useState({ value: 0 })
     
     useEffect(() => {
@@ -19,7 +20,6 @@ const DashboardView = () => {
 
         if (user) {
             user = JSON.parse(user)
-            console.log('user exists', user)
             dispatch(actions.setAuthenticatedUser(user))
         }
     }, [])
@@ -32,18 +32,31 @@ const DashboardView = () => {
                 <button className={tab.value === 1 ? 'active' : ''} onClick={() => setTab({ value: 1 })}>Unanswered</button>
             </Tabs>
 
-            {questions && (
+            {questions && answers && (
                 questions.map(question => {
-                    return (
-                        <QuestionCard 
-                            key={question.id}
-                            id={question.id}
-                            author={question.author}
-                            optionOne={question.optionOne}
-                            optionTwo={question.optionTwo}
-                            timestamp={question.timestamp}
-                        />
-                    )
+                    if (!Object.keys(answers).includes(question.id) && tab.value === 0) {
+                        return (
+                            <QuestionCard 
+                                key={question.id}
+                                id={question.id}
+                                author={question.author}
+                                optionOne={question.optionOne}
+                                optionTwo={question.optionTwo}
+                                timestamp={question.timestamp}
+                            />
+                        )
+                    } else if (tab.value === 1 && Object.keys(answers).includes(question.id)) {
+                        return (
+                            <QuestionCard 
+                                key={question.id}
+                                id={question.id}
+                                author={question.author}
+                                optionOne={question.optionOne}
+                                optionTwo={question.optionTwo}
+                                timestamp={question.timestamp}
+                            />
+                        )
+                    }
                 })
             )}
         </Container>
