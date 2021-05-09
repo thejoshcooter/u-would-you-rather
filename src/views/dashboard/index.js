@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
 import * as actions from '../../redux/actions/'
 
+import QuestionCard from '../../components/QuestionCard'
+
 const DashboardView = () => {
     const dispatch = useDispatch()
     const questions = useSelector((state) => state.questions.data)
@@ -24,7 +26,20 @@ const DashboardView = () => {
     return (
         <>
         <Container>
-            
+            {questions && (
+                questions.map(question => {
+                    return (
+                        <QuestionCard 
+                            key={question.id}
+                            id={question.id}
+                            author={question.author}
+                            optionOne={question.optionOne}
+                            optionTwo={question.optionTwo}
+                            timestamp={question.timestamp}
+                        />
+                    )
+                })
+            )}
         </Container>
         </>
     )
@@ -36,6 +51,10 @@ const Container = styled.div`
     height: auto;
     margin: 0 auto;
     margin-top: 3rem;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
 `
 
 
