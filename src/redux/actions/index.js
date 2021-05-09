@@ -9,8 +9,8 @@ export const FETCH_QUESTIONS_REQ = 'FETCH_QUESTIONS_REQ'
 export const FETCH_QUESTIONS_SUCCESS = 'FETCH_QUESTIONS_SUCCESS'
 export const FETCH_QUESTIONS_ERROR = 'FETCH_QUESTIONS_ERROR'
 export const DEMO_LOGIN_SUCCESS = 'DEMO_LOGIN_SUCCESS'
-export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
 export const SET_AUTHENTICATED_USER = 'SET_AUTHENTICATED_USER'
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
 export const CREATE_QUESTION_REQ = 'CREATE_QUESTION_REQ'
 export const CREATE_QUESTION_SUCCESS = 'CREATE_QUESTION_SUCCESS'
 export const CREATE_QUESTION_ERROR = 'CREATE_QUESTION_ERROR'
@@ -81,6 +81,10 @@ export const logout = () => {
         localStorage.clear()
         dispatch({ type: LOGOUT_SUCCESS })
     }
+}
+
+export const setAuthenticatedUser = (user) => {
+    return { type: SET_AUTHENTICATED_USER, payload: user }
 }
 
 export const createQuestion = (opt1, opt2, author) => {

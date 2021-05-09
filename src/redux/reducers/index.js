@@ -60,6 +60,11 @@ const initialState = {
                 ...state,
                 auth: initialState.auth
             }
+        case actions.SET_AUTHENTICATED_USER:
+            return {
+                ...state,
+                auth: { ...state.auth, isLoggedIn: true, demo: true, ...action.payload }
+            }
         case actions.SAVE_ANSWER_REQ:
             console.log('save question reducer firing!')
         default:
