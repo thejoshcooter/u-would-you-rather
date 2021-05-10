@@ -11,12 +11,15 @@ export const FETCH_QUESTIONS_ERROR = 'FETCH_QUESTIONS_ERROR'
 export const DEMO_LOGIN_SUCCESS = 'DEMO_LOGIN_SUCCESS'
 export const SET_AUTHENTICATED_USER = 'SET_AUTHENTICATED_USER'
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
+// export const CREATE_QUESTION_REQ = 'CREATE_QUESTION_REQ'
+// export const CREATE_QUESTION_SUCCESS = 'CREATE_QUESTION_SUCCESS'
+// export const CREATE_QUESTION_ERROR = 'CREATE_QUESTION_ERROR'
+// export const SAVE_ANSWER_REQ = 'SAVE_ANSWER_REQ'
+// export const SAVE_ANSWER_SUCCESS = 'SAVE_ANSWER_SUCCESS'
+// export const SAVE_ANSWER_ERROR = 'SAVE_ANSWER_ERROR'
 export const CREATE_QUESTION_REQ = 'CREATE_QUESTION_REQ'
 export const CREATE_QUESTION_SUCCESS = 'CREATE_QUESTION_SUCCESS'
 export const CREATE_QUESTION_ERROR = 'CREATE_QUESTION_ERROR'
-export const SAVE_ANSWER_REQ = 'SAVE_ANSWER_REQ'
-export const SAVE_ANSWER_SUCCESS = 'SAVE_ANSWER_SUCCESS'
-export const SAVE_ANSWER_ERROR = 'SAVE_ANSWER_ERROR'
 
 // action creators
 export const fetchUsers = () => {
@@ -87,36 +90,51 @@ export const setAuthenticatedUser = (user) => {
     return { type: SET_AUTHENTICATED_USER, payload: user }
 }
 
-export const createQuestion = (opt1, opt2, author) => {
+// export const createQuestion = (opt1, opt2, author) => {
+//     return (dispatch) => {
+//         let question = { optionOneText: opt1, optionTwoText: opt2, author }
+//         dispatch({ type: CREATE_QUESTION_REQ })
+//         API._saveQuestion(question)
+//         .then( res => {
+//             console.log('[server res]', res)
+//         })
+//         .catch(e => console.error(e))
+//     }
+// }
+
+// export const saveAnswer = (qid, answer) => {
+//     return (dispatch, getState) => {
+//         const authedUser = getState().auth.userId
+
+//         dispatch({ type: SAVE_ANSWER_REQ })
+
+//         API._saveQuestionAnswer({ authedUser, qid, answer })
+//         .then(res => {
+//             API._getQuestions()
+//             .then(res => {
+//                 console.log('[SERVER RES]', res)
+//                 let payload = Object.values(res).sort((a,b) => b.timestamp - a.timestamp )
+//                 dispatch({ type: FETCH_QUESTIONS_SUCCESS, payload: payload })
+//             })
+//             .catch(e => {
+//                 dispatch({ type: FETCH_QUESTIONS_ERROR, errors: e })
+//             })
+//         })
+//         .catch(e => console.error(e))
+//     }
+// }
+
+export const createQuestion = (question) => {
     return (dispatch) => {
-        let question = { optionOneText: opt1, optionTwoText: opt2, author }
         dispatch({ type: CREATE_QUESTION_REQ })
+
         API._saveQuestion(question)
-        .then( res => {
-            console.log('[server res]', res)
-        })
-        .catch(e => console.error(e))
-    }
-}
-
-export const saveAnswer = (qid, answer) => {
-    return (dispatch, getState) => {
-        const authedUser = getState().auth.userId
-
-        dispatch({ type: SAVE_ANSWER_REQ })
-
-        API._saveQuestionAnswer({ authedUser, qid, answer })
         .then(res => {
-            API._getQuestions()
-            .then(res => {
-                console.log('[SERVER RES]', res)
-                let payload = Object.values(res).sort((a,b) => b.timestamp - a.timestamp )
-                dispatch({ type: FETCH_QUESTIONS_SUCCESS, payload: payload })
-            })
-            .catch(e => {
-                dispatch({ type: FETCH_QUESTIONS_ERROR, errors: e })
-            })
+            console.log('[server res]', res)
+            dispatch({ type: CREATE_QUESTION_SUCCESS, payload: res })
         })
-        .catch(e => console.error(e))
+        .catch(e => {
+            dispatch({ type: CREATE_QUESTION_ERROR })
+        })
     }
 }

@@ -65,8 +65,11 @@ const initialState = {
                 ...state,
                 auth: { ...state.auth, isLoggedIn: true, demo: true, ...action.payload }
             }
-        case actions.SAVE_ANSWER_REQ:
-            console.log('save question reducer firing!')
+        case actions.CREATE_QUESTION_SUCCESS:
+            return {
+                ...state,
+                questions: { ...state.questions, data: [...state.questions.data, action.payload] }
+            }
         default:
             return state
     }
