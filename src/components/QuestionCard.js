@@ -9,7 +9,6 @@ const QuestionCard = ({ id, author, optionOne, optionTwo, timestamp, answered })
     const users = useSelector(state => state.users.data)
     const opAvatar = users.filter(user => user.id === author)[0].avatarURL
     const userAnswers = useSelector(state => state.auth.answers)
-    console.log(id, author, optionOne, optionTwo, timestamp, answered)
     
     return (
         <>

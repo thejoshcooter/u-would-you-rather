@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
-import { useRouteMatch } from 'react-router-dom'
+import { useRouteMatch, Redirect } from 'react-router-dom'
 
 import QuestionCard from '../../components/QuestionCard'
 
@@ -9,7 +9,7 @@ const QuestionView = () => {
     const questions = useSelector(state => state.questions.data)
     const answers = useSelector(state => state.auth.answers)
     const questionId = useRouteMatch().params.id
-    console.log('USER ANSWERS ', answers)
+    const questionExists = questions.some(question => question.id === questionId)
 
     return (
         <>
@@ -29,6 +29,10 @@ const QuestionView = () => {
                         )
                     }
                 })}
+
+                {!questionExists && (
+                    <Redirect to='/404' />
+                )}
             </Container>
         </>
     )

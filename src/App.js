@@ -11,6 +11,7 @@ import DashboardView from './views/dashboard'
 import LeaderboardView from './views/leaderboard'
 import CreateQuestionView from './views/create-question'
 import QuestionView from './views/question'
+import Error404 from './views/404'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -36,6 +37,7 @@ const App = () => {
       <PrivateRoute path='/leaderboard' component={LeaderboardView} />
       <PrivateRoute path='/add' component={CreateQuestionView} />
       <PrivateRoute path='/questions/:id' component={QuestionView} />
+      <PrivateRoute path='/404' component={Error404} />
     </>
   );
 }
