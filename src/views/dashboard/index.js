@@ -15,13 +15,6 @@ const DashboardView = () => {
     useEffect(() => {
         console.log('*** DASHBOARD MOUNTED ***')
         dispatch(actions.loadAppData())
-
-        let user = localStorage.getItem('authenticatedUser')
-
-        if (user) {
-            user = JSON.parse(user)
-            dispatch(actions.setAuthenticatedUser(user))
-        }
     }, [])
     
     return (

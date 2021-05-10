@@ -39,7 +39,7 @@ const Divider = styled.div`
     justify-content: center;
     align-items: center;
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 1rem;
     text-transform: uppercase;
 `
 

@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import Poll from './Poll'
 import Results from './Results'
@@ -7,6 +8,8 @@ import Results from './Results'
 const QuestionCard = ({ id, author, optionOne, optionTwo, timestamp, answered }) => {
     const users = useSelector(state => state.users.data)
     const opAvatar = users.filter(user => user.id === author)[0].avatarURL
+    const userAnswers = useSelector(state => state.auth.answers)
+    console.log(id, author, optionOne, optionTwo, timestamp, answered)
     
     return (
         <>
@@ -18,6 +21,14 @@ const QuestionCard = ({ id, author, optionOne, optionTwo, timestamp, answered })
                             <span className='author'>{author}</span>
                             <span className='date'>posted at {timestamp}</span>
                         </UserInfo>
+
+                        {Object.keys(userAnswers).includes(id) && (
+                            <Link className='more' to={`/questions/${id}`}><button>View Results</button></Link>
+                        )}
+
+                        {!Object.keys(userAnswers).includes(id) && (
+                            <Link className='more' to={`/questions/${id}`}><button>View Poll</button></Link>
+                        )}
                     </Heading>
                     
                     <Content>
@@ -62,6 +73,20 @@ const Heading = styled.div`
     justify-content: flex-start;
     align-items: center;
     color: #fff;
+
+    .more {
+        margin-left: auto;
+        margin-right: 2rem;
+
+        button {
+            width: 8rem;
+            height: 2rem;
+            border-radius: 3px;
+            background-color: transparent;
+            border: 1px solid #fff;
+            color: #fff;
+        }
+    }
 `
 
 const Avatar = styled.div`
