@@ -28,8 +28,8 @@ const DashboardView = () => {
         <>
         <Container>
             <Tabs>
-                <button className={tab.value === 0 ? 'active' : ''} onClick={() => setTab({ value: 0 })}>Answered</button>
-                <button className={tab.value === 1 ? 'active' : ''} onClick={() => setTab({ value: 1 })}>Unanswered</button>
+                <button className={tab.value === 0 ? 'active' : ''} onClick={() => setTab({ value: 0 })}>Unanswered</button>
+                <button className={tab.value === 1 ? 'active' : ''} onClick={() => setTab({ value: 1 })}>Answered</button>
             </Tabs>
 
             {questions && answers && (
@@ -43,6 +43,7 @@ const DashboardView = () => {
                                 optionOne={question.optionOne}
                                 optionTwo={question.optionTwo}
                                 timestamp={question.timestamp}
+                                answered={false}
                             />
                         )
                     } else if (tab.value === 1 && Object.keys(answers).includes(question.id)) {
@@ -54,6 +55,7 @@ const DashboardView = () => {
                                 optionOne={question.optionOne}
                                 optionTwo={question.optionTwo}
                                 timestamp={question.timestamp}
+                                answered={true}
                             />
                         )
                     }

@@ -2,8 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 import Poll from './Poll'
+import Results from './Results'
 
-const QuestionCard = ({ id, author, optionOne, optionTwo, timestamp }) => {
+const QuestionCard = ({ id, author, optionOne, optionTwo, timestamp, answered }) => {
     const users = useSelector(state => state.users.data)
     const opAvatar = users.filter(user => user.id === author)[0].avatarURL
     
@@ -20,12 +21,23 @@ const QuestionCard = ({ id, author, optionOne, optionTwo, timestamp }) => {
                     </Heading>
                     
                     <Content>
-                        <Poll 
-                            id={id}
-                            author={author}
-                            optionOne={optionOne}
-                            optionTwo={optionTwo}
-                        />
+                        {!answered && (
+                            <Poll 
+                                id={id}
+                                author={author}
+                                optionOne={optionOne}
+                                optionTwo={optionTwo}
+                            />
+                        )}
+
+                        {answered && (
+                            <Results 
+                                id={id}
+                                author={author}
+                                optionOne={optionOne}
+                                optionTwo={optionTwo}
+                            />
+                        )}
                     </Content>
             </Container>
         )}
@@ -49,6 +61,7 @@ const Heading = styled.div`
     flex-flow: row nowrap;
     justify-content: flex-start;
     align-items: center;
+    color: #fff;
 `
 
 const Avatar = styled.div`
