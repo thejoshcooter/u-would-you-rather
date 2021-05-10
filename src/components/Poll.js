@@ -1,13 +1,23 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useSelector, useDispatch } from 'react-redux'
+
+import * as actions from '../redux/actions'
 
 const Poll = ({ id, author, optionOne, optionTwo }) => {
+    const dispatch = useDispatch()
+    const user = useSelector(state => state.auth.id)
+
+    const onVote = (user, qid, answer) => {
+        dispatch(actions.saveAnswer(user, qid, answer))
+    }
+    
     return (
         <>
             <Container>
                 <Option>
                     <p>{optionOne.text}</p>
-                    <button>Vote</button>
+                    <button onClick={() => onVote(user, id, 'optionOne')}>Vote</button>
                 </Option>
 
                 <Divider>
@@ -16,7 +26,7 @@ const Poll = ({ id, author, optionOne, optionTwo }) => {
 
                 <Option>
                     <p>{optionTwo.text}</p>
-                    <button>Vote</button>
+                    <button onClick={() => onVote(user, id, 'optionTwo')}>Vote</button>
                 </Option>
             </Container>
         </>

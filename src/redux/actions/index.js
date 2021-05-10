@@ -20,6 +20,9 @@ export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
 export const CREATE_QUESTION_REQ = 'CREATE_QUESTION_REQ'
 export const CREATE_QUESTION_SUCCESS = 'CREATE_QUESTION_SUCCESS'
 export const CREATE_QUESTION_ERROR = 'CREATE_QUESTION_ERROR'
+export const SAVE_ANSWER_REQ = 'SAVE_ANSWER_REQUEST'
+export const SAVE_ANSWER_SUCCESS = 'SAVE_ANSWER_SUCCESS'
+export const SAVE_ANSWER_ERROR = 'SAVE_ANSWER_ERROR'
 
 // action creators
 export const fetchUsers = () => {
@@ -135,6 +138,23 @@ export const createQuestion = (question) => {
         })
         .catch(e => {
             dispatch({ type: CREATE_QUESTION_ERROR })
+        })
+    }
+}
+
+export const saveAnswer = (authedUser, qid, answer) => {
+    return (dispatch) => {
+        dispatch({ type: SAVE_ANSWER_REQ })
+
+        let payload = { authedUser, qid, answer }
+        console.log('payload: ', payload)
+
+        API._saveQuestionAnswer(payload)
+        .then(res => {
+            dispatch({ type: SAVE_ANSWER_SUCCESS, payload: { qid, answer } })
+        })
+        .catch(e => {
+            dispatch({ type: SAVE_ANSWER_ERROR })
         })
     }
 }

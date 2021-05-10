@@ -70,6 +70,12 @@ const initialState = {
                 ...state,
                 questions: { ...state.questions, data: [...state.questions.data, action.payload] }
             }
+        case actions.SAVE_ANSWER_SUCCESS:
+            console.log('reducer payload: ', action.payload)
+            return {
+                ...state,
+                auth: { ...state.auth, answers: { ...state.auth.answers, [action.payload.qid]: action.payload.answer } }
+            }
         default:
             return state
     }
