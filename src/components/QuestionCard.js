@@ -85,6 +85,12 @@ const Heading = styled.div`
             border: 1px solid #fff;
             color: #fff;
         }
+
+        button:hover {
+            background-color: #fff;
+            color: #0066ff;
+            transition: 0.5s;
+        }
     }
 `
 

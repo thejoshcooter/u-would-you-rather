@@ -35,7 +35,7 @@ const MainMenu = () => {
                     <Account>
                         <Avatar image={auth.avatarURL}>
                         </Avatar>
-                        <h3>{auth.user}</h3>
+                        <h3>{auth.name}</h3>
                         <button onClick={onLogout}><i className="fas fa-sign-out-alt"></i></button>
                     </Account>
                 )}
@@ -90,10 +90,12 @@ const Nav = styled.div`
         height: 100%;
         border: none;
         margin: 0 1rem;
+        background-color: transparent;
     }
 
     button:hover {
         border-bottom: 2px solid #0066FF;
+
     }
 `
 
@@ -113,6 +115,7 @@ const Account = styled.div`
         color: rgba(0, 0, 0, 0.5);
         font-size: 1.25rem;
         margin-left: 1rem;
+        background-color: transparent;
     }
 
     button:hover {

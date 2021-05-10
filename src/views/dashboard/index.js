@@ -88,6 +88,12 @@ const Tabs = styled.div`
         margin: 0 1rem;
     }
 
+    button:hover {
+        background-color: #0066ff;
+        color: #fff;
+        transition: 0.5s;
+    }
+
     button.active {
         background-color: #0066FF;
         color: #fff;

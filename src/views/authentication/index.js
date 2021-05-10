@@ -76,7 +76,7 @@ const Container = styled.div`
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.1);
     box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
 `
 

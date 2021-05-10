@@ -1,15 +1,18 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
 import * as actions from '../redux/actions'
 
 const Poll = ({ id, author, optionOne, optionTwo }) => {
     const dispatch = useDispatch()
+    const history = useHistory()
     const user = useSelector(state => state.auth.id)
 
     const onVote = (user, qid, answer) => {
         dispatch(actions.saveAnswer(user, qid, answer))
+        history.push(`/questions/${id}`)
     }
     
     return (
@@ -68,6 +71,12 @@ const Option = styled.div`
         border: 1px solid #0066FF;
         background-color: transparent;
         color: #0066FF;
+    }
+
+    button:hover {
+        background-color: #0066ff;
+        color: #fff;
+        transition: 0.5s;
     }
 `
 
