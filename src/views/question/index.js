@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
-import { useRouteMatch, Redirect } from 'react-router-dom'
+import { useRouteMatch} from 'react-router-dom'
 
 import QuestionCard from '../../components/QuestionCard'
 import Error404 from '../404/index'

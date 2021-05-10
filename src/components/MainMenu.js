@@ -8,7 +8,6 @@ const MainMenu = () => {
     const history = useHistory()
     const dispatch = useDispatch()
     const auth = useSelector((state) => state.auth)
-    const user = useSelector(state => state.users.data).filter(user => user.id === auth.userId)[0]
 
     useEffect(() => {
         console.log('*** MAIN MENU MOUNTED ***')

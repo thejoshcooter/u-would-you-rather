@@ -93,40 +93,6 @@ export const setAuthenticatedUser = (user) => {
     return { type: SET_AUTHENTICATED_USER, payload: user }
 }
 
-// export const createQuestion = (opt1, opt2, author) => {
-//     return (dispatch) => {
-//         let question = { optionOneText: opt1, optionTwoText: opt2, author }
-//         dispatch({ type: CREATE_QUESTION_REQ })
-//         API._saveQuestion(question)
-//         .then( res => {
-//             console.log('[server res]', res)
-//         })
-//         .catch(e => console.error(e))
-//     }
-// }
-
-// export const saveAnswer = (qid, answer) => {
-//     return (dispatch, getState) => {
-//         const authedUser = getState().auth.userId
-
-//         dispatch({ type: SAVE_ANSWER_REQ })
-
-//         API._saveQuestionAnswer({ authedUser, qid, answer })
-//         .then(res => {
-//             API._getQuestions()
-//             .then(res => {
-//                 console.log('[SERVER RES]', res)
-//                 let payload = Object.values(res).sort((a,b) => b.timestamp - a.timestamp )
-//                 dispatch({ type: FETCH_QUESTIONS_SUCCESS, payload: payload })
-//             })
-//             .catch(e => {
-//                 dispatch({ type: FETCH_QUESTIONS_ERROR, errors: e })
-//             })
-//         })
-//         .catch(e => console.error(e))
-//     }
-// }
-
 export const createQuestion = (question) => {
     return (dispatch) => {
         dispatch({ type: CREATE_QUESTION_REQ })
@@ -152,6 +118,7 @@ export const saveAnswer = (authedUser, qid, answer) => {
         API._saveQuestionAnswer(payload)
         .then(res => {
             dispatch({ type: SAVE_ANSWER_SUCCESS, payload: { qid, answer } })
+            dispatch(fetchQuestions())
         })
         .catch(e => {
             dispatch({ type: SAVE_ANSWER_ERROR })

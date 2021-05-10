@@ -30,6 +30,8 @@ const QuestionCard = ({ id, author, optionOne, optionTwo, timestamp, answered })
                         )}
                     </Heading>
                     
+                    <Title>Would You Rather...</Title>
+
                     <Content>
                         {!answered && (
                             <Poll 
@@ -120,6 +122,12 @@ const UserInfo = styled.div`
     }
 `
 
+const Title = styled.h1`
+    text-align: center;
+    margin-top: 2rem;
+    color: rgba(0, 0, 0, 0.8);
+`
+
 const Content = styled.div`
     width: 100%;
     min-height: 20rem;
@@ -127,7 +135,7 @@ const Content = styled.div`
     flex-flow: row nowrap;
     justify-content: center;
     align-items: center;
-    margin-top: 2rem;
+    margin-top: 0rem;
 `
 
 export default QuestionCard
