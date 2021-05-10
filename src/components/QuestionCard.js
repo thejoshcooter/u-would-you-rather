@@ -18,7 +18,7 @@ const QuestionCard = ({ id, author, optionOne, optionTwo, timestamp, answered })
                         {opAvatar && <Avatar image={opAvatar} />}
                         <UserInfo>
                             <span className='author'>{author}</span>
-                            <span className='date'>posted at {timestamp}</span>
+                            <span className='date'>posted at {new Date(timestamp).toDateString()}</span>
                         </UserInfo>
 
                         {Object.keys(userAnswers).includes(id) && (
