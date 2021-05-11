@@ -8,12 +8,19 @@ export const FETCH_USERS_ERROR = 'FETCH_USERS_ERROR'
 export const FETCH_QUESTIONS_REQ = 'FETCH_QUESTIONS_REQ' 
 export const FETCH_QUESTIONS_SUCCESS = 'FETCH_QUESTIONS_SUCCESS'
 export const FETCH_QUESTIONS_ERROR = 'FETCH_QUESTIONS_ERROR'
-export const DEMO_LOGIN = 'DEMO_LOGIN'
+export const DEMO_LOGIN_SUCCESS = 'DEMO_LOGIN_SUCCESS'
 export const SET_AUTHENTICATED_USER = 'SET_AUTHENTICATED_USER'
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
+// export const CREATE_QUESTION_REQ = 'CREATE_QUESTION_REQ'
+// export const CREATE_QUESTION_SUCCESS = 'CREATE_QUESTION_SUCCESS'
+// export const CREATE_QUESTION_ERROR = 'CREATE_QUESTION_ERROR'
+// export const SAVE_ANSWER_REQ = 'SAVE_ANSWER_REQ'
+// export const SAVE_ANSWER_SUCCESS = 'SAVE_ANSWER_SUCCESS'
+// export const SAVE_ANSWER_ERROR = 'SAVE_ANSWER_ERROR'
 export const CREATE_QUESTION_REQ = 'CREATE_QUESTION_REQ'
 export const CREATE_QUESTION_SUCCESS = 'CREATE_QUESTION_SUCCESS'
 export const CREATE_QUESTION_ERROR = 'CREATE_QUESTION_ERROR'
-export const SAVE_ANSWER_REQ = 'SAVE_ANSWER_REQ'
+export const SAVE_ANSWER_REQ = 'SAVE_ANSWER_REQUEST'
 export const SAVE_ANSWER_SUCCESS = 'SAVE_ANSWER_SUCCESS'
 export const SAVE_ANSWER_ERROR = 'SAVE_ANSWER_ERROR'
 
@@ -56,10 +63,29 @@ export const loadAppData = () => {
     }
 }
 
-export const demoLogin = (userId, username) => {
+export const demoLogin = (form, history) => {
     return (dispatch, getState) => {
-        let user = getState().users.data.filter(user => user.id === userId)[0]
-        dispatch({ type: DEMO_LOGIN, payload: { userId: userId, username: username, avatarURL: user.avatarURL, questions: user.questions, answers: user.answers } })
+        const auth = getState().auth
+        const users = getState().users.data
+        let demoUsers = ['sarahedo', 'tylermcginnis', 'johndoe']
+
+        const { id, username, password } = form
+
+        if (demoUsers.includes(id) && password === auth.demoCredentials) {
+            let user = users.filter(user => user.id === id)[0]
+            localStorage.setItem('authenticatedUser', JSON.stringify(user))
+            dispatch({ type: DEMO_LOGIN_SUCCESS, payload: user })
+            history.push('/dashboard')
+        } else {
+            console.log('please provide valid credentials')
+        }
+    }
+}
+
+export const logout = () => {
+    return (dispatch) => {
+        localStorage.clear()
+        dispatch({ type: LOGOUT_SUCCESS })
     }
 }
 
@@ -67,36 +93,35 @@ export const setAuthenticatedUser = (user) => {
     return { type: SET_AUTHENTICATED_USER, payload: user }
 }
 
-export const createQuestion = (opt1, opt2, author) => {
+export const createQuestion = (question) => {
     return (dispatch) => {
-        let question = { optionOneText: opt1, optionTwoText: opt2, author }
         dispatch({ type: CREATE_QUESTION_REQ })
+
         API._saveQuestion(question)
-        .then( res => {
+        .then(res => {
             console.log('[server res]', res)
+            dispatch({ type: CREATE_QUESTION_SUCCESS, payload: res })
         })
-        .catch(e => console.error(e))
+        .catch(e => {
+            dispatch({ type: CREATE_QUESTION_ERROR })
+        })
     }
 }
 
-export const saveAnswer = (qid, answer) => {
-    return (dispatch, getState) => {
-        const authedUser = getState().auth.userId
-
+export const saveAnswer = (authedUser, qid, answer) => {
+    return (dispatch) => {
         dispatch({ type: SAVE_ANSWER_REQ })
 
-        API._saveQuestionAnswer({ authedUser, qid, answer })
+        let payload = { authedUser, qid, answer }
+        console.log('payload: ', payload)
+
+        API._saveQuestionAnswer(payload)
         .then(res => {
-            API._getQuestions()
-            .then(res => {
-                console.log('[SERVER RES]', res)
-                let payload = Object.values(res).sort((a,b) => b.timestamp - a.timestamp )
-                dispatch({ type: FETCH_QUESTIONS_SUCCESS, payload: payload })
-            })
-            .catch(e => {
-                dispatch({ type: FETCH_QUESTIONS_ERROR, errors: e })
-            })
+            dispatch({ type: SAVE_ANSWER_SUCCESS, payload: { qid, answer } })
+            dispatch(fetchQuestions())
         })
-        .catch(e => console.error(e))
+        .catch(e => {
+            dispatch({ type: SAVE_ANSWER_ERROR })
+        })
     }
 }

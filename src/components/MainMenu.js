@@ -1,21 +1,20 @@
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { Link, useHistory } from 'react-router-dom'
 import * as actions from '../redux/actions'
 
 const MainMenu = () => {
-    const dispatch = useDispatch()
     const history = useHistory()
+    const dispatch = useDispatch()
     const auth = useSelector((state) => state.auth)
-    const user = useSelector(state => state.users.data).filter(user => user.id === auth.userId)[0]
 
     useEffect(() => {
         console.log('*** MAIN MENU MOUNTED ***')
     }, [])
 
     const onLogout = () => {
-        localStorage.clear()
+        dispatch(actions.logout())
         history.push('/')
     }
     
@@ -35,7 +34,7 @@ const MainMenu = () => {
                     <Account>
                         <Avatar image={auth.avatarURL}>
                         </Avatar>
-                        <h3>{auth.user}</h3>
+                        <h3>{auth.name}</h3>
                         <button onClick={onLogout}><i className="fas fa-sign-out-alt"></i></button>
                     </Account>
                 )}
@@ -90,10 +89,12 @@ const Nav = styled.div`
         height: 100%;
         border: none;
         margin: 0 1rem;
+        background-color: transparent;
     }
 
     button:hover {
         border-bottom: 2px solid #0066FF;
+
     }
 `
 
@@ -113,6 +114,7 @@ const Account = styled.div`
         color: rgba(0, 0, 0, 0.5);
         font-size: 1.25rem;
         margin-left: 1rem;
+        background-color: transparent;
     }
 
     button:hover {

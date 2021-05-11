@@ -4,13 +4,8 @@ import * as actions from '../actions/index'
 const initialState = {
     auth: {
         isLoggedIn: false,
-        userId: null,
-        user: null,
         demo: false,
-        demoCredentials: 'password123',
-        avatarURL: null,
-        questions: null,
-        answers: null
+        demoCredentials: 'password123'
     },
     users: {
         fetching: false,
@@ -55,36 +50,32 @@ const initialState = {
                 ...state,
                 questions: { ...state.questions, fetching: false, errors: action.payload }
             }
-        case actions.DEMO_LOGIN:
+        case actions.DEMO_LOGIN_SUCCESS:
             return {
                 ...state,
-                auth: { 
-                    ...state.auth, 
-                    isLoggedIn: true, 
-                    userId: action.payload.userId, 
-                    user: action.payload.username, 
-                    demo: true,
-                    avatarURL: action.payload.avatarURL,
-                    questions: action.payload.questions,
-                    answers: action.payload.answers 
-                }
+                auth: { ...state.auth, isLoggedIn: true, demo: true, ...action.payload }
+            }
+        case actions.LOGOUT_SUCCESS:
+            return {
+                ...state,
+                auth: initialState.auth
             }
         case actions.SET_AUTHENTICATED_USER:
             return {
                 ...state,
-                auth: { 
-                    ...state.auth, 
-                    isLoggedIn: true, 
-                    userId: action.payload.id, 
-                    user: action.payload.name, 
-                    demo: true,
-                    avatarURL: action.payload.avatarURL,
-                    questions: action.payload.questions,
-                    answers: action.payload.answers 
-                }
+                auth: { ...state.auth, isLoggedIn: true, demo: true, ...action.payload }
             }
-        case actions.SAVE_ANSWER_REQ:
-            console.log('save question reducer firing!')
+        case actions.CREATE_QUESTION_SUCCESS:
+            return {
+                ...state,
+                questions: { ...state.questions, data: [...state.questions.data, action.payload] }
+            }
+        case actions.SAVE_ANSWER_SUCCESS:
+            console.log('reducer payload: ', action.payload)
+            return {
+                ...state,
+                auth: { ...state.auth, answers: { ...state.auth.answers, [action.payload.qid]: action.payload.answer } }
+            }
         default:
             return state
     }

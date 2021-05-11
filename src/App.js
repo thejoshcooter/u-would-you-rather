@@ -10,7 +10,8 @@ import AuthenticationView from './views/authentication'
 import DashboardView from './views/dashboard'
 import LeaderboardView from './views/leaderboard'
 import CreateQuestionView from './views/create-question'
-import PollView from './views/poll'
+import QuestionView from './views/question'
+import Error404 from './views/404'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -20,10 +21,12 @@ const App = () => {
 
     dispatch(actions.loadAppData())
     
-    if (localStorage.getItem('authenticatedUser')) {
-      let authUser = JSON.parse(localStorage.getItem('authenticatedUser'))
-      dispatch(actions.setAuthenticatedUser(authUser))
-    }
+    let user = localStorage.getItem('authenticatedUser')
+
+        if (user) {
+            user = JSON.parse(user)
+            dispatch(actions.setAuthenticatedUser(user))
+        }
   }, [])
   
   return (
@@ -33,7 +36,8 @@ const App = () => {
       <PrivateRoute path='/dashboard' component={DashboardView} />
       <PrivateRoute path='/leaderboard' component={LeaderboardView} />
       <PrivateRoute path='/add' component={CreateQuestionView} />
-      <PrivateRoute path='/questions/:id/results' component={PollView} />
+      <PrivateRoute path='/questions/:id' component={QuestionView} />
+      <PrivateRoute path='/404' component={Error404} />
     </>
   );
 }

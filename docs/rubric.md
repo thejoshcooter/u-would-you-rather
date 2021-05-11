@@ -70,17 +70,17 @@
 
 [x] When the user is logged in, the details of the poll are shown. If the user is logged out, he/she is asked to log in before before being able to access the poll.
 
-[] The application asks the user to sign in and shows a 404 page if that poll does not exist. (In other words, if a user creates a poll and then the same or another user tries to access that poll by its url, the user should be asked to sign in and then be shown a 404 page. Please keep in mind that new polls will not be accessible at their url because of the way the backend is set up in this application.)
+[x] The application asks the user to sign in and shows a 404 page if that poll does not exist. (In other words, if a user creates a poll and then the same or another user tries to access that poll by its url, the user should be asked to sign in and then be shown a 404 page. Please keep in mind that new polls will not be accessible at their url because of the way the backend is set up in this application.)
 
 **Does the voting mechanism work correctly?**
 
-[] Upon voting in a poll, all of the information of the answered poll is displayed.
+[?] Upon voting in a poll, all of the information of the answered poll is displayed.
 
-[] The user’s response is recorded and is clearly visible on the poll details page.
+[?] The user’s response is recorded and is clearly visible on the poll details page.
 
-[] When the user comes back to the home page, the polling question appears in the “Answered” column.
+[?] When the user comes back to the home page, the polling question appears in the “Answered” column.
 
-[] The voting mechanism works correctly, and the data on the leaderboard changes appropriately.
+[?] The voting mechanism works correctly, and the data on the leaderboard changes appropriately.
 
 **Can users add new polls?**
 
@@ -119,7 +119,7 @@
 
 **Does the code run without errors? Is the code free of warnings that resulted from not following the best practices listed in the documentation, such as using key for list items? Is the code formatted properly?**
 
-[] The code runs without errors. There are no warnings that resulted from not following the best practices listed in the documentation, such as using key for list items. All code is functional and formatted properly.
+[x] The code runs without errors. There are no warnings that resulted from not following the best practices listed in the documentation, such as using key for list items. All code is functional and formatted properly.
 
 **Does the store serve as the application’s single source of truth?**
 
@@ -137,9 +137,9 @@
 
 **Does application state update correctly?**
 
-[] Updates are triggered by dispatching action creators to reducers.
+[x] Updates are triggered by dispatching action creators to reducers.
 
-[] Reducers and actions are written properly and correctly return updated state to the store.
+[x] Reducers and actions are written properly and correctly return updated state to the store.
 
 **Does the architecture of the application make sense?**
 

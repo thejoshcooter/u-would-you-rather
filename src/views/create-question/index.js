@@ -6,7 +6,7 @@ import * as actions from '../../redux/actions'
 
 const CreateQuestionView = () => {
     const dispatch = useDispatch()
-    const user = useSelector(state => state.auth.userId)
+    const user = useSelector(state => state.auth.id)
     const history = useHistory()
 
     const [form, setForm] = useState({
@@ -17,12 +17,11 @@ const CreateQuestionView = () => {
 
     const onChange = (e) => {
         setForm({ ...form, author: user, [e.target.name]: e.target.value })
-        console.log(form)
     }
 
     const onSubmit = (e) => {
         e.preventDefault()
-        dispatch(actions.createQuestion(form.optionOneText, form.optionTwoText, form.author))
+        dispatch(actions.createQuestion(form))
         history.push('/dashboard')
     }
     
